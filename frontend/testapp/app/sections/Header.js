@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, Image } from "react-native";
 
 const Header = ({ message }) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -8,6 +8,7 @@ const Header = ({ message }) => {
 
   return (
     <View style={styles.headStyle}>
+      <Image style={styles.logoStyle} source={require("./img/clock-48.png")} />
       <Text style={styles.headText} onPress={() => setLoggedIn(!loggedIn)}>
         {display}
       </Text>
@@ -21,12 +22,22 @@ const styles = StyleSheet.create({
   headText: {
     textAlign: "right",
     color: "#ffffff",
-    fontSize: 20
+    fontSize: 20,
+    flex: 1
   },
   headStyle: {
     paddingTop: 60,
     paddingBottom: 10,
     paddingRight: 10,
-    backgroundColor: "#35605a"
+    backgroundColor: "#35605a",
+    flex: 1,
+    flexDirection: "row",
+    borderBottomWidth: 2,
+    borderColor: "#000000"
+  },
+  logoStyle: {
+    width: 20,
+    height: 20,
+    marginLeft: 20
   }
 });
