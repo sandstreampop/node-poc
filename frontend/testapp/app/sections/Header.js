@@ -1,15 +1,49 @@
-import React, { useState } from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  Text,
+  StyleSheet,
+  View,
+  AsyncStorage,
+  Alert,
+  Image
+} from "react-native";
 
-const Header = ({ message }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+const Header = props => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [user, setLoggedInUser] = useState(false);
+  const { navigation } = props;
+  const display = isLoggedIn ? user : "Logga in";
 
-  const display = loggedIn ? message : "Sample User";
+  useEffect(() => {
+    AsyncStorage.getItem("userLoggedIn", (err, result) => {
+      if (result === "none") {
+        console.log("NONE");
+      } else if (result === null) {
+        AsyncStorage.setItem("userLoggedIn", "none", (err, result) => {
+          console.log("Set user to NONE");
+        });
+      } else {
+        setLoggedIn(true);
+        setLoggedInUser(result);
+      }
+    });
+  });
+
+  toggleUser = () => {
+    if (isLoggedIn) {
+      AsyncStorage.setItem("userLoggedIn", "none", (err, result) => {});
+      setLoggedIn(false);
+      setLoggedInUser(false);
+      Alert.alert("Du är nu utloggad");
+    } else {
+      navigation.navigate("LoginRT");
+    }
+  };
 
   return (
     <View style={styles.headStyle}>
       <Image style={styles.logoStyle} source={require("./img/clock-48.png")} />
-      <Text style={styles.headText} onPress={() => setLoggedIn(!loggedIn)}>
+      <Text style={styles.headText} onPress={() => toggleUser()}>
         {display}
       </Text>
     </View>

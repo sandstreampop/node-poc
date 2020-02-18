@@ -14,7 +14,7 @@ export default Hero;
 
 const styles = StyleSheet.create({
   heroStyle: {
-    flex: 4,
+    flex: 1,
     width: undefined,
     height: undefined
   }
