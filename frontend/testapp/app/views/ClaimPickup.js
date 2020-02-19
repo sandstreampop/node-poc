@@ -15,8 +15,8 @@ const ClaimPickup = props => {
     async function fetchData() {
       try {
         let json = await AsyncStorage.getItem("requests_unclaimed");
+        console.log("fds" + json);
         json = JSON.parse(json);
-        setJsonData(json);
         if (json !== null) {
           const arr = [];
           arr.push(json);
