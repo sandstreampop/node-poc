@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, AsyncStorage, Alert } from "react-native";
 import HeaderContainer from "../sections/HeaderContainer";
 import { Input, Button, ButtonGroup } from "react-native-elements";
@@ -6,18 +6,14 @@ import { Input, Button, ButtonGroup } from "react-native-elements";
 const RequestPickup = props => {
   const { navigation } = props;
 
-  const [message, setMessage] = useState("Skriv meddelande");
-  const [name, setName] = useState("Ditt namn");
-  const [email, setEmail] = useState("Din e-post");
+  const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const clearFields = () => {
     setMessage("");
     setName("");
     setEmail("");
-
-    AsyncStorage.getAllKeys()
-      .then(keys => AsyncStorage.multiRemove(keys))
-      .then(() => alert("success"));
   };
 
   const requestPickup = async () => {
@@ -46,6 +42,10 @@ const RequestPickup = props => {
         console.log(`request created ${result}`);
       });
     });
+
+    setMessage("");
+    setName("");
+    setEmail("");
   };
 
   return (
