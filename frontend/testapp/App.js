@@ -27,6 +27,9 @@ const MyRoutes = StackNavigator({
 });
 
 const theme = {
+  Header: {
+    color: "white"
+  },
   Button: {
     containerStyle: {
       margin: 10

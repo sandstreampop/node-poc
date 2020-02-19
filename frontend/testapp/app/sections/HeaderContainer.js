@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, AsyncStorage, Alert, Image } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import { AsyncStorage, Alert, Image } from "react-native";
 
-import { Header, Text, MyCustomRightComponent } from "react-native-elements";
+import { Header, Text, ThemeContext } from "react-native-elements";
 
 const HeaderContainer = props => {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -24,7 +24,7 @@ const HeaderContainer = props => {
     });
   });
 
-  toggleUser = () => {
+  const toggleUser = () => {
     if (isLoggedIn) {
       AsyncStorage.setItem("userLoggedIn", "none", (err, result) => {});
       setLoggedIn(false);
@@ -37,33 +37,13 @@ const HeaderContainer = props => {
 
   return (
     <Header
-      rightComponent={<Text onPress={() => toggleUser()}>{display}</Text>}
+      rightComponent={
+        <Text style={{ color: "white" }} onPress={() => toggleUser()}>
+          {display}
+        </Text>
+      }
     />
   );
 };
 
 export default HeaderContainer;
-
-// const styles = StyleSheet.create({
-//   headText: {
-//     textAlign: "right",
-//     color: "#ffffff",
-//     fontSize: 20,
-//     flex: 1
-//   },
-//   headStyle: {
-//     paddingTop: 60,
-//     paddingBottom: 10,
-//     paddingRight: 10,
-//     backgroundColor: "#35605a",
-//     flex: 1,
-//     flexDirection: "row",
-//     borderBottomWidth: 2,
-//     borderColor: "#000000"
-//   },
-//   logoStyle: {
-//     width: 20,
-//     height: 20,
-//     marginLeft: 20
-//   }
-// });
