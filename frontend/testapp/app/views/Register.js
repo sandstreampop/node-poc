@@ -8,12 +8,13 @@ import {
   Alert,
   AsyncStorage
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const Register = props => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const { navigation } = props;
+  const navigation = useNavigation();
 
   cancelRegister = () => {
     navigation.navigate("HomeRT");

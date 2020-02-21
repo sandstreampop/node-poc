@@ -8,18 +8,19 @@ import {
   Alert,
   AsyncStorage
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Login = props => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { navigation } = props;
+  const navigation = useNavigation();
 
-  cancelLogin = () => {
+  const cancelLogin = () => {
     Alert.alert("Inloggning avbruten");
     navigation.navigate("HomeRT");
   };
 
-  login = () => {
+  const login = () => {
     if (!username) {
       Alert.alert("Fyll i ett användarnamn");
     } else if (!password) {

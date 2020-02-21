@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { View, AsyncStorage, Alert } from "react-native";
 import HeaderContainer from "../sections/HeaderContainer";
 import { Input, Button, ButtonGroup } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 const RequestPickup = props => {
-  const { navigation } = props;
+  const navigation = useNavigation();
 
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");

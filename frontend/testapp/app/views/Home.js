@@ -4,12 +4,10 @@ import HeaderContainer from "../sections/HeaderContainer";
 import Menu from "../sections/Menu";
 
 const Home = props => {
-  const { navigation } = props;
-
   return (
     <View>
       <HeaderContainer {...props} />
-      <Menu navigate={navigation} />
+      <Menu />
     </View>
   );
 };

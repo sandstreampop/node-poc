@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, AsyncStorage, Text } from "react-native";
 import HeaderContainer from "../sections/HeaderContainer";
 import { ListItem, Button } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
+
+import Map from "./Map";
 
 const ClaimPickup = props => {
+  const navigation = useNavigation();
+
   const clearAll = () => {
     AsyncStorage.getAllKeys()
       .then(keys => AsyncStorage.multiRemove(keys))
@@ -41,6 +46,7 @@ const ClaimPickup = props => {
         />
       ))}
       <Button title="Clear all" onPress={() => clearAll()}></Button>
+      <Map />
     </View>
   );
 };

@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AsyncStorage, Alert, Image } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 import { Header, Text, ThemeContext } from "react-native-elements";
 
 const HeaderContainer = props => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [user, setLoggedInUser] = useState(false);
-  const { navigation } = props;
+  const navigation = useNavigation();
+
   const display = isLoggedIn ? user : "Logga in";
 
   useEffect(() => {
