@@ -3,8 +3,7 @@ import { View, AsyncStorage, Text } from "react-native";
 import HeaderContainer from "../sections/HeaderContainer";
 import { ListItem, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-
-import Map from "./Map";
+import ClaimModal from "../sections/ClaimModal";
 
 const ClaimPickup = props => {
   const navigation = useNavigation();
@@ -16,16 +15,22 @@ const ClaimPickup = props => {
   };
 
   const [data, setData] = useState([]);
+  const [clickedItem, setClickedItem] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const onClickedItem = item => {
+    setClickedItem(item);
+    setModalVisible(true);
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
         let json = await AsyncStorage.getItem("requests_unclaimed");
-        console.log("fds" + json);
         json = JSON.parse(json);
+
         if (json !== null) {
-          const arr = [];
-          arr.push(json);
-          setData(arr);
+          setData(json["requests"]);
         }
       } catch (error) {
         console.log(error);
@@ -41,12 +46,17 @@ const ClaimPickup = props => {
         <ListItem
           key={i}
           title={`Name: ${l.name} Email: ${l.email}`}
-          subtitle={l.message}
+          subtitle={`Location: ${l.location.description}`}
           bottomDivider
+          onPress={() => onClickedItem(l)}
         />
       ))}
+      <ClaimModal
+        modalVisible={modalVisible}
+        item={clickedItem}
+        onDismiss={() => setModalVisible(false)}
+      />
       <Button title="Clear all" onPress={() => clearAll()}></Button>
-      <Map />
     </View>
   );
 };

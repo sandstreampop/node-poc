@@ -13,7 +13,6 @@ const HeaderContainer = props => {
   useEffect(() => {
     AsyncStorage.getItem("userLoggedIn", (err, result) => {
       if (result === "none") {
-        console.log("NONE");
       } else if (result === null) {
         AsyncStorage.setItem("userLoggedIn", "none", (err, result) => {
           console.log("Set user to NONE");
